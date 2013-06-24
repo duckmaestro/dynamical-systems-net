@@ -17,9 +17,18 @@ The base class design is composed principally of
 and <code>VectorOI</code>. 
 
 To define your derivative <code>dy_i/dt</code> you simply subclass and implement
-virtual method <code>DynamicalNode.F(y,t)</code>, and instantiate it with name e.g. "y_i". 
+virtual method <code>DynamicalNode.F(t, y)</code>, and instantiate it with name e.g. "y_i". 
 Dependencies on other variables are explicitly definable 
 via access to the mutable list of incoming node edges.
+
+This convention assumes your system of equations is of the form 
+<code>{ dy_i/dt = F(t, y, ext) } | i:[1,n]</code> 
+where <code>dy_i/dt</code> is
+the rate of change of one variable <code>y_i</code>, 
+<code>y</code> is the state of all variables in the system, 
+<code>n</code> is the number of variables in the system,
+<code>t</code> is the current time,
+and <code>ext</code> is some external state.
 
 Example Project
 ---------------
