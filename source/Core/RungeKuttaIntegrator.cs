@@ -19,6 +19,9 @@ using System.Collections.Generic;
 
 namespace DynamicalSystemsNet.Core
 {
+    /// <summary>
+    /// A 4-th order Runge-Kutta integrator.
+    /// </summary>
     public class RungeKuttaIntegrator : IIntegrator
     {
         /// <summary>
@@ -86,9 +89,8 @@ namespace DynamicalSystemsNet.Core
         /// <summary>
         /// Execute one iteration of integration, moving
         /// the dynamical system forward in time by
-        /// deltaTime seconds.
+        /// the given delta time.
         /// </summary>
-        /// <param name="deltaTime">The time step measured in seconds.</param>
         public void Step(double deltaTime)
         {
             double h = deltaTime;

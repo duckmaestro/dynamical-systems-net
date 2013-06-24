@@ -20,9 +20,19 @@ using System.Text;
 
 namespace DynamicalSystemsNet.Core
 {
+    /// <summary>
+    /// Represents a dynamical system e.g. a system of differential equations.
+    /// </summary>
     public class DynamicalSystem
     {
+        /// <summary>
+        /// The currently active integrator for this system.
+        /// </summary>
         public IIntegrator Integrator { get; protected set; }
+        
+        /// <summary>
+        /// Read-only access to the nodes of this system.
+        /// </summary>
         public IEnumerable<DynamicalNode> Nodes
         {
             get
@@ -37,31 +47,54 @@ namespace DynamicalSystemsNet.Core
         }
 
 
+        /// <summary>
+        /// Creates a new dynamical system using the provided integrator.
+        /// </summary>
+        /// <param name="integrator"></param>
         public DynamicalSystem(IIntegrator integrator)
         {
             this.Integrator = integrator;
         }
 
+        /// <summary>
+        /// Advances the system forward in time by the given delta time. 
+        /// </summary>
         public virtual void Step(double deltaTime)
         {
             this.Integrator.Step(deltaTime);
         }
 
+        /// <summary>
+        /// Overridable method for selecting the nodes of the system
+        /// to use during printing the state of this system.
+        /// </summary>
+        /// <returns></returns>
         public virtual IEnumerable<DynamicalNode> SelectNodesForToString()
         {
             return this.Nodes;
         }
 
+        /// <summary>
+        /// Overridable method for printing the value of a node in this system.
+        /// </summary>
         public virtual string FormatNodeValue(DynamicalNode node)
         {
             return node.Value.ToString("F3");
         }
 
+        /// <summary>
+        /// Overridable method for selecting the nominal "output" nodes of this system.
+        /// </summary>
+        /// <returns></returns>
         public virtual IEnumerable<DynamicalNode> SelectOutputLayer()
         {
             return this.Nodes;
         }
 
+        /// <summary>
+        /// Overridable method for printing the state of this system.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             RungeKuttaIntegrator rki = Integrator as RungeKuttaIntegrator;

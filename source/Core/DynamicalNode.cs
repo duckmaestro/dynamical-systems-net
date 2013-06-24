@@ -21,21 +21,33 @@ using System.Numerics;
 
 namespace DynamicalSystemsNet.Core
 {
+    /// <summary>
+    /// Represents a variable in a system of differential equations.
+    /// </summary>
     [DebuggerDisplay("{Name}")]
     public class DynamicalNode
     {
+        /// <summary>
+        /// An arbtirary name for this node.
+        /// </summary>
         public string Name
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// The amount of history to keep for this node.
+        /// </summary>
         public int HistorySize
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Read-only access to this nodes history.
+        /// </summary>
         public IEnumerable<Complex> History
         {
             get
@@ -52,7 +64,7 @@ namespace DynamicalSystemsNet.Core
         }
 
         /// <summary>
-        /// Average magnitude over the history size.
+        /// The average magnitude over the history of this node.
         /// </summary>
         public double AverageMagnitude
         {
@@ -62,12 +74,19 @@ namespace DynamicalSystemsNet.Core
             }
         }
 
+        /// <summary>
+        /// Mutable access to the list of incoming nodes i.e. the list of other
+        /// variables in the system on which this node depends.
+        /// </summary>
         public IList<NodeLink> IncomingNodes
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// The current value of this node.
+        /// </summary>
         public Complex Value
         {
             get
@@ -94,18 +113,27 @@ namespace DynamicalSystemsNet.Core
             }
         }
 
-        public DynamicalNode(double initialTime, Complex initialValue, string id = null)
+        /// <summary>
+        /// Creates a new node with given initial time, initial value, and name.
+        /// </summary>
+        public DynamicalNode(double initialTime, Complex initialValue, string name = null)
         {
-            this.Name = id ?? "Anonymous Node";
+            this.Name = name ?? "Anonymous Node";
             this.IncomingNodes = new List<NodeLink>();
             this.Value = initialValue;
         }
 
+        /// <summary>
+        /// Addes a new incoming node to this node.
+        /// </summary>
         public bool AddIncomingNode(DynamicalNode node)
         {
             return AddIncomingNode(node, 1.0, 0, 0);
         }
         
+        /// <summary>
+        /// Addes a new incoming node to this node, with given decay and plasticity values.
+        /// </summary>
         public bool AddIncomingNode(DynamicalNode node, Complex weight, double decay, double plasticity)
         {
             if (this.IncomingNodes.Any(link => link.From == node))

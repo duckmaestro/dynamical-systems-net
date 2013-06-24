@@ -18,6 +18,9 @@ using System.Collections.Generic;
 
 namespace DynamicalSystemsNet.Core
 {
+    /// <summary>
+    /// Defines the supported properties and methods of a numerical integrator.
+    /// </summary>
     public interface IIntegrator
     {
         /// <summary>

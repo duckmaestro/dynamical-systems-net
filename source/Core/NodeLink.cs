@@ -19,6 +19,9 @@ using System.Numerics;
 
 namespace DynamicalSystemsNet.Core
 {
+    /// <summary>
+    /// Represents a link (dependency) of on node (variable) on another.
+    /// </summary>
     [DebuggerDisplay("{From.Name} -> {To.Name}")]
     public class NodeLink
     {
@@ -51,12 +54,18 @@ namespace DynamicalSystemsNet.Core
             set;
         }
 
+        /// <summary>
+        /// The plasticity of this connection's weight.
+        /// </summary>
         public double Plasticity
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// The decay of this connection's weight.
+        /// </summary>
         public double Decay
         {
             get;

@@ -34,7 +34,7 @@ namespace DynamicalSystemsNet.Core
     }
 
     /// <summary>
-    /// An object indexed vector. This is a vector
+    /// An object-indexed vector. This is a vector
     /// type, composed of 0 or more complex-valued elements.
     /// Contrary to typical vector types, the VectorOI is
     /// indexed by object reference instead of by position #.
