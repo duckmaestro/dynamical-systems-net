@@ -36,7 +36,7 @@ The examples project includes:
 + A sine-wave generator system.
 + A linear-coupled two variable oscillating system.
 + Two (2) gradient-frequency neural network (GFNN) systems.
-+ A Hebbian-learning example, forming connection weights ontop of a GFNN system.
++ A Hebbian-learning example, forming connection weights atop of a GFNN system.
 
 Original Motivation
 -------------------
